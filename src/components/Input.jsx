@@ -73,7 +73,6 @@ const Input = () => {
         [data.chatId + ".date"]: serverTimestamp(),
       });
     } catch (error) {
-      // console.error(Error);
       console.log(error);
     } finally {
       setText("");

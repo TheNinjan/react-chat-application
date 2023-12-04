@@ -88,10 +88,10 @@ const Search = () => {
       });
 
       if (!res.exists()) {
-        //create a chat in chats collection
+        //creating a chat in chats collection
         await setDoc(doc(db, "chats", combinedId), { messages: [] });
 
-        //create user chats
+        //creating user chats
         await updateDoc(doc(db, "userChats", currentUser.uid), {
           [combinedId + ".userInfo"]: {
             uid: user.uid,

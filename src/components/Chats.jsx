@@ -13,12 +13,7 @@ const Chats = () => {
     const getChats = () => {
       const unsub = onSnapshot(doc(db, "userChats", currentUser.uid), (doc) => {
         setChats(doc.data());
-        console.log(
-          "Getting data from server and Setting data in localstate (userChats)",
-          doc.data()
-        );
       });
-      // unsub();
       return () => {
         unsub();
       };
@@ -30,7 +25,7 @@ const Chats = () => {
   const handleSelect = (u) => {
     dispatch({ type: "CHANGE_USER", payload: u });
   };
-  console.log("seeing data chats", chats);
+  // console.log("seeing data chats", chats);
   return (
     <div className="chats">
       {Object.entries(chats)
@@ -47,7 +42,6 @@ const Chats = () => {
               <img src={chat[1].photoURL} alt="hh" />
               <div className="userChatInfo">
                 <span>{chat[1].displayName}</span>
-                {/* <p>{chat[1][1].lastMessage?.text}</p> */}
               </div>
             </div>
           );
