@@ -7,9 +7,7 @@ import {
   arrayUnion,
   doc,
   serverTimestamp,
-  Timestamp,
   updateDoc,
-  setDoc,
 } from "firebase/firestore";
 import { db, storage } from "../firebase";
 import { v4 as uuid } from "uuid";
@@ -23,6 +21,7 @@ const Input = () => {
   const { data } = useContext(ChatContext);
 
   const handleSend = async () => {
+    if (!text) return;
     try {
       if (img) {
         const storageRef = ref(storage, uuid());
@@ -40,7 +39,7 @@ const Input = () => {
                     id: uuid(),
                     text,
                     senderId: currentUser.uid,
-                    date: Timestamp.now(),
+                    date: Date.now(),
                     img: downloadURL,
                   }),
                 });
@@ -54,7 +53,7 @@ const Input = () => {
             id: uuid(),
             text,
             senderId: currentUser.uid,
-            date: Timestamp.now(),
+            date: Date.now(),
           }),
         });
       }
@@ -83,6 +82,7 @@ const Input = () => {
   return (
     <div className="input">
       <input
+        required
         type="text"
         placeholder="Type something..."
         onChange={(e) => setText(e.target.value)}
@@ -91,6 +91,7 @@ const Input = () => {
       <div className="send">
         <img src={Attach} alt="" />
         <input
+          required
           type="file"
           style={{ display: "none" }}
           id="file"
@@ -99,7 +100,9 @@ const Input = () => {
         <label htmlFor="file">
           <img src={Img} alt="img" />
         </label>
-        <button onClick={handleSend}>Send</button>
+        <button style={text ? { background: "blue" } : {}} onClick={handleSend}>
+          Send
+        </button>
       </div>
     </div>
   );
