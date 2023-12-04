@@ -8,10 +8,11 @@ import { ChatContext } from "../context/ChatContext";
 
 const Chat = () => {
   const { data } = useContext(ChatContext);
+  // console.log("=================>>", data);
   return (
     <div className="chat">
       <div className="chatInfo">
-        <span>{data.user.displayName}</span>
+        <span>{data.user.dispalyName}</span>
         <div className="chatIcons">
           <img src={Cam} alt="" />
           <img src={Add} alt="" />
@@ -23,5 +24,4 @@ const Chat = () => {
     </div>
   );
 };
-
 export default Chat;

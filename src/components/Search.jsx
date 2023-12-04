@@ -47,28 +47,6 @@ const Search = () => {
         : user.uid + currentUser.uid;
     try {
       const res = await getDoc(doc(db, "chats", combinedId));
-      //from here to
-      // const res2 = await getDoc(doc(db, "userChats", combinedId));
-      // if (!res2.exists()) {
-      //   await setDoc(doc(db, "userChats", user.uid), {
-      //     [combinedId + ".userInfo"]: {
-      //       uid: currentUser.uid,
-      //       displayName: currentUser.displayName,
-      //       photoURL: currentUser.photoURL,
-      //     },
-      //     [combinedId + ".date"]: serverTimestamp(),
-      //   });
-
-      //   await setDoc(doc(db, "userChats", currentUser.uid), {
-      //     [combinedId + ".userInfo"]: {
-      //       uid: user.uid,
-      //       displayName: user.displayName,
-      //       photoURL: user.photoURL,
-      //     },
-      //     [combinedId + ".date"]: serverTimestamp(),
-      //   });
-      // }
-      // here
       await setDoc(doc(db, "userChats", user.uid), {
         [combinedId + ".userInfo"]: {
           uid: currentUser.uid,
@@ -112,6 +90,7 @@ const Search = () => {
       }
     } catch (err) {
       console.error(err);
+      setErr(true);
     }
     setUser(null);
     setUsername("");
