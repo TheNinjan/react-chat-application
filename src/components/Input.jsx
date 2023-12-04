@@ -72,7 +72,7 @@ const Input = () => {
         [data.chatId + ".date"]: serverTimestamp(),
       });
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     } finally {
       setText("");
       setImg(null);
